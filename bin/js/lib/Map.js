@@ -75,8 +75,12 @@ var MapMain = /** @class */ (function () {
         //生成数组
         this.AllPathArray = this.getAllPathArray();
         //生成结果
-        this.MainPath = this.findShortPath(startX, startY, endX, endY);
-        this.steps = this.MainPath.length;
+        try {
+            this.MainPath = this.findShortPath(startX, startY, endX, endY);
+            this.steps = this.MainPath.length;
+        }
+        catch (_c) {
+        }
         return this.ALLPath;
     };
     //生成随机路线(会尝试n次直到成功,用于生成主路)
@@ -311,7 +315,7 @@ var MapMain = /** @class */ (function () {
             if (tmpp.mapUnitBorder.top == false) {
                 var tmpx = tmpp.X - 1;
                 var tmpy = tmpp.Y - 2;
-                if (tmpx >= 0 && tmpx < this.SizeX && tmpy >= 0 && tmpy < this.SizeX && closePathArray[tmpx][tmpy] == null) {
+                if (tmpx >= 0 && tmpx < this.SizeX && tmpy >= 0 && tmpy < this.SizeY && closePathArray[tmpx][tmpy] == null) {
                     tmpp.PD = PathDirection.top;
                     this.AllPathArray[tmpx][tmpy].LastStep = tmpp;
                     if (tmpx == (endX - 1) && tmpy == (endY - 1)) {
@@ -326,7 +330,7 @@ var MapMain = /** @class */ (function () {
             if (tmpp.mapUnitBorder.right == false) {
                 var tmpx = tmpp.X;
                 var tmpy = tmpp.Y - 1;
-                if (tmpx >= 0 && tmpx < this.SizeX && tmpy >= 0 && tmpy < this.SizeX && closePathArray[tmpx][tmpy] == null) {
+                if (tmpx >= 0 && tmpx < this.SizeX && tmpy >= 0 && tmpy < this.SizeY && closePathArray[tmpx][tmpy] == null) {
                     tmpp.PD = PathDirection.right;
                     this.AllPathArray[tmpx][tmpy].LastStep = tmpp;
                     if (tmpx == (endX - 1) && tmpy == (endY - 1)) {
@@ -341,7 +345,7 @@ var MapMain = /** @class */ (function () {
             if (tmpp.mapUnitBorder.bottom == false) {
                 var tmpx = tmpp.X - 1;
                 var tmpy = tmpp.Y;
-                if (tmpx >= 0 && tmpx < this.SizeX && tmpy >= 0 && tmpy < this.SizeX && closePathArray[tmpx][tmpy] == null) {
+                if (tmpx >= 0 && tmpx < this.SizeX && tmpy >= 0 && tmpy < this.SizeY && closePathArray[tmpx][tmpy] == null) {
                     tmpp.PD = PathDirection.bottom;
                     this.AllPathArray[tmpx][tmpy].LastStep = tmpp;
                     if (tmpx == (endX - 1) && tmpy == (endY - 1)) {
@@ -356,7 +360,7 @@ var MapMain = /** @class */ (function () {
             if (tmpp.mapUnitBorder.left == false) {
                 var tmpx = tmpp.X - 2;
                 var tmpy = tmpp.Y - 1;
-                if (tmpx >= 0 && tmpx < this.SizeX && tmpy >= 0 && tmpy < this.SizeX && closePathArray[tmpx][tmpy] == null) {
+                if (tmpx >= 0 && tmpx < this.SizeX && tmpy >= 0 && tmpy < this.SizeY && closePathArray[tmpx][tmpy] == null) {
                     tmpp.PD = PathDirection.left;
                     this.AllPathArray[tmpx][tmpy].LastStep = tmpp;
                     if (tmpx == (endX - 1) && tmpy == (endY - 1)) {

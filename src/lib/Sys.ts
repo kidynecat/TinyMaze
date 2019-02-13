@@ -13,11 +13,11 @@ class Sys {
 		//txt.borderColor = "#ffff00";
 		//设置宽高以后的自动裁剪会按照这个区域裁剪
 		//txt.size(300, 50);
-		txt.fontSize = 15;
-		txt.color = "#ffffff";
+		txt.fontSize = 20;
+		txt.color = "#ff0000";
 		txt.overflow = layaText.VISIBLE;
-		txt.x = 10;
-		txt.y = 700
+		txt.x = 10
+		txt.y = 600
 		Laya.stage.addChild(txt);
 		return txt;
 	}

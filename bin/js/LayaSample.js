@@ -2,14 +2,11 @@ var WebGL = Laya.WebGL;
 // 程序入口
 var Main = /** @class */ (function () {
     function Main() {
-        this.map = new MapMain(30, 30);
+        this.map = new MapMain(20, 20);
         this.pss = [];
         this.unitsize = 16;
         //画布
         Laya.init(1000, 700, WebGL);
-        //消息
-        var msg = "";
-        msg = msg + ("\u4E3B\u8DEF\u751F\u6210\u5C1D\u8BD5" + this.map.times + "\u6B21,\u4E3B\u8DEF\u5171" + this.map.steps + "\u6B65");
         //maze
         //随机生成起点和终点
         var sx = Math.floor(Math.random() * this.map.SizeX + 1);
@@ -25,6 +22,9 @@ var Main = /** @class */ (function () {
         // var ex = 30;
         // var ey = 30;
         this.pss = this.map.InitMap2(sx, sy, ex, ey);
+        //消息
+        var msg = "";
+        msg = msg + ("\u6700\u77ED\u5171" + this.map.steps + "\u6B65");
         this.sp = new Laya.Sprite();
         Laya.stage.addChild(this.sp);
         if (this.pss != null) {
@@ -46,11 +46,11 @@ var Main = /** @class */ (function () {
         this.player.sp.x = sx * this.unitsize;
         this.player.sp.y = sy * this.unitsize;
         Laya.stage.addChild(this.player.sp);
+        //显示消息
+        Sys.createText(msg);
         //操作
         Laya.stage.on(Laya.Event.KEY_PRESS, this, this.keyOrder);
         Laya.stage.on(Laya.Event.KEY_DOWN, this, this.keydown);
-        //显示消息
-        Sys.createText(msg);
     }
     Main.prototype.keyOrder = function (e) {
         //显示结果路径

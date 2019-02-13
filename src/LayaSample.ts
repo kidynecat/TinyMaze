@@ -2,7 +2,7 @@ import WebGL = Laya.WebGL;
 // 程序入口
 class Main {
     private sp: Laya.Sprite;
-    map = new MapMain(30, 30);
+    map = new MapMain(20, 20);
     pss: Array<PathStep> = [];
     unitsize = 16;
     
@@ -12,9 +12,7 @@ class Main {
         //画布
         Laya.init(1000, 700, WebGL);
 
-        //消息
-        let msg: string = "";
-        msg = msg + `主路生成尝试${this.map.times}次,主路共${this.map.steps}步`
+
 
         //maze
         //随机生成起点和终点
@@ -34,6 +32,10 @@ class Main {
         // var ey = 30;
 
         this.pss = this.map.InitMap2(sx, sy, ex, ey);
+
+        //消息
+        let msg: string = "";
+        msg = msg + `最短共${this.map.steps}步`
 
 
         this.sp = new Laya.Sprite();
@@ -59,12 +61,14 @@ class Main {
         this.player.sp.y = sy*this.unitsize;
         Laya.stage.addChild(this.player.sp);
 
+        //显示消息
+        Sys.createText(msg);
+
         //操作
         Laya.stage.on(Laya.Event.KEY_PRESS, this, this.keyOrder);
         Laya.stage.on(Laya.Event.KEY_DOWN, this, this.keydown);
 
-        //显示消息
-        Sys.createText(msg);
+
     }
 
     public keyOrder(e: Laya.Event) {
@@ -85,6 +89,8 @@ class Main {
                 Sys.drawMapUnit("p", this.sp, ps, this.unitsize, "#00ff00", "#00ff00");
             }
         }
+
+        
     }
 
     public keydown(e: Laya.Event) {

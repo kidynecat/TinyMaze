@@ -88,9 +88,15 @@ class MapMain {
 		//生成数组
 		this.AllPathArray = this.getAllPathArray();
 		//生成结果
-		this.MainPath = this.findShortPath(startX,startY,endX,endY);
-		this.steps = this.MainPath.length;
-		
+		try {
+			this.MainPath = this.findShortPath(startX, startY, endX, endY);
+			this.steps = this.MainPath.length;
+		}
+		catch
+		{
+
+		}
+
 		return this.ALLPath;
 	}
 
@@ -350,101 +356,87 @@ class MapMain {
 			closePathArray.push(tmps)
 		}
 
-		let openPathArray: Array<PathStep> = [this.AllPathArray[startX -1][startY -1]];
+		let openPathArray: Array<PathStep> = [this.AllPathArray[startX - 1][startY - 1]];
 		let isEnd = false;
-		let endstep:PathStep = null;
+		let endstep: PathStep = null;
 		while (openPathArray.length > 0 && !isEnd) {
 
 			var tmpp = openPathArray.shift();
 			closePathArray[tmpp.X - 1][tmpp.Y - 1] = tmpp;
-			if (tmpp.mapUnitBorder.top == false)  {
-				var tmpx = tmpp.X -1;
-				var tmpy = tmpp.Y -2;
-				if(tmpx >=0 && tmpx <this.SizeX && tmpy >= 0 && tmpy <this.SizeX && closePathArray[tmpx][tmpy] == null)
-				{
+			if (tmpp.mapUnitBorder.top == false) {
+				var tmpx = tmpp.X - 1;
+				var tmpy = tmpp.Y - 2;
+				if (tmpx >= 0 && tmpx < this.SizeX && tmpy >= 0 && tmpy < this.SizeY && closePathArray[tmpx][tmpy] == null) {
 					tmpp.PD = PathDirection.top;
 					this.AllPathArray[tmpx][tmpy].LastStep = tmpp;
-					
-					if(tmpx == (endX -1) && tmpy == (endY -1))
-					{
+
+					if (tmpx == (endX - 1) && tmpy == (endY - 1)) {
 						isEnd = true;
 						endstep = this.AllPathArray[tmpx][tmpy];
 					}
-					else
-					{
+					else {
 						openPathArray.push(this.AllPathArray[tmpx][tmpy]);
 					}
 				}
 			}
-			if (tmpp.mapUnitBorder.right == false)  {
+			if (tmpp.mapUnitBorder.right == false) {
 				var tmpx = tmpp.X;
-				var tmpy = tmpp.Y -1;
-				if(tmpx >=0 && tmpx <this.SizeX && tmpy >= 0 && tmpy <this.SizeX && closePathArray[tmpx][tmpy] == null)
-				{
+				var tmpy = tmpp.Y - 1;
+				if (tmpx >= 0 && tmpx < this.SizeX && tmpy >= 0 && tmpy < this.SizeY && closePathArray[tmpx][tmpy] == null) {
 					tmpp.PD = PathDirection.right;
 					this.AllPathArray[tmpx][tmpy].LastStep = tmpp;
-					if(tmpx == (endX -1) && tmpy == (endY -1))
-					{
+					if (tmpx == (endX - 1) && tmpy == (endY - 1)) {
 						isEnd = true;
 						endstep = this.AllPathArray[tmpx][tmpy];
 					}
-					else
-					{
+					else {
 						openPathArray.push(this.AllPathArray[tmpx][tmpy]);
 					}
 				}
 			}
-			if (tmpp.mapUnitBorder.bottom == false)  {
-				var tmpx = tmpp.X -1;
-				var tmpy = tmpp.Y ;
-				if(tmpx >=0 && tmpx <this.SizeX && tmpy >= 0 && tmpy <this.SizeX && closePathArray[tmpx][tmpy] == null)
-				{
+			if (tmpp.mapUnitBorder.bottom == false) {
+				var tmpx = tmpp.X - 1;
+				var tmpy = tmpp.Y;
+				if (tmpx >= 0 && tmpx < this.SizeX && tmpy >= 0 && tmpy < this.SizeY && closePathArray[tmpx][tmpy] == null) {
 					tmpp.PD = PathDirection.bottom;
 					this.AllPathArray[tmpx][tmpy].LastStep = tmpp;
-					if(tmpx == (endX -1) && tmpy == (endY -1))
-					{
+					if (tmpx == (endX - 1) && tmpy == (endY - 1)) {
 						isEnd = true;
 						endstep = this.AllPathArray[tmpx][tmpy];
 					}
-					else
-					{
+					else {
 						openPathArray.push(this.AllPathArray[tmpx][tmpy]);
 					}
 				}
 			}
-			if (tmpp.mapUnitBorder.left == false)  {
-				var tmpx = tmpp.X -2;
-				var tmpy = tmpp.Y -1;
-				if(tmpx >=0 && tmpx <this.SizeX && tmpy >= 0 && tmpy <this.SizeX && closePathArray[tmpx][tmpy] == null)
-				{
+			if (tmpp.mapUnitBorder.left == false) {
+				var tmpx = tmpp.X - 2;
+				var tmpy = tmpp.Y - 1;
+				if (tmpx >= 0 && tmpx < this.SizeX && tmpy >= 0 && tmpy < this.SizeY && closePathArray[tmpx][tmpy] == null) {
 					tmpp.PD = PathDirection.left;
 					this.AllPathArray[tmpx][tmpy].LastStep = tmpp;
-					if(tmpx == (endX -1) && tmpy == (endY -1))
-					{
+					if (tmpx == (endX - 1) && tmpy == (endY - 1)) {
 						isEnd = true;
 						endstep = this.AllPathArray[tmpx][tmpy];
 					}
-					else
-					{
+					else {
 						openPathArray.push(this.AllPathArray[tmpx][tmpy]);
 					}
 				}
 			}
 		}
 
-		if(isEnd)
-		{
-			var result:Array<PathStep> =[endstep];
+		if (isEnd) {
+			var result: Array<PathStep> = [endstep];
 
-			while(endstep.LastStep != null)
-			{
+			while (endstep.LastStep != null) {
 				result.push(endstep.LastStep);
 				endstep = endstep.LastStep;
 			}
-			
+
 			return result;
 		}
-		else{
+		else {
 			return null;
 		}
 	}
