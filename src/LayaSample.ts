@@ -2,7 +2,7 @@ import WebGL = Laya.WebGL;
 // 程序入口
 class Main {
     private sp: Laya.Sprite;
-    map = new MapMain(20, 30);
+    map = new MapMain(30, 30);
     pss: Array<PathStep> = [];
     unitsize = 16;
     
@@ -22,12 +22,20 @@ class Main {
         var sy = Math.floor(Math.random() * this.map.SizeY + 1)
         var ex = 0;
         var ey = 0;
+        
         while (sx == ex || sy == ey || ex == 0 || ey == 0)  {
             ex = Math.floor(Math.random() * this.map.SizeX + 1)
             ey = Math.floor(Math.random() * this.map.SizeX + 1)
         }
 
+        // var sx = 1;
+        // var sy = 1;
+        // var ex = 30;
+        // var ey = 30;
+
         this.pss = this.map.InitMap2(sx, sy, ex, ey);
+
+
         this.sp = new Laya.Sprite();
         Laya.stage.addChild(this.sp);
         if (this.pss != null) {

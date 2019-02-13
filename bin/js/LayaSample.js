@@ -2,7 +2,7 @@ var WebGL = Laya.WebGL;
 // 程序入口
 var Main = /** @class */ (function () {
     function Main() {
-        this.map = new MapMain(20, 30);
+        this.map = new MapMain(30, 30);
         this.pss = [];
         this.unitsize = 16;
         //画布
@@ -20,6 +20,10 @@ var Main = /** @class */ (function () {
             ex = Math.floor(Math.random() * this.map.SizeX + 1);
             ey = Math.floor(Math.random() * this.map.SizeX + 1);
         }
+        // var sx = 1;
+        // var sy = 1;
+        // var ex = 30;
+        // var ey = 30;
         this.pss = this.map.InitMap2(sx, sy, ex, ey);
         this.sp = new Laya.Sprite();
         Laya.stage.addChild(this.sp);
